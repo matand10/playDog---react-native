@@ -19,6 +19,7 @@ import { useDimensions, useDeviceOrientation } from '@react-native-community/hoo
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import ViewImageScreen from './src/screens/ViewImageScreen';
 // import AppNavigator from './src/app.navigator';
+import Homepage from './src/screens/Homepage';
 
 
 
@@ -33,8 +34,9 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       {/* <WelcomeScreen /> */}
-      <ViewImageScreen />
+      {/* <ViewImageScreen /> */}
       {/* <AppNavigator /> */}
+      <Homepage />
     </SafeAreaView>
   );
 }
