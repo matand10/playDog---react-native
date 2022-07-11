@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { ScrollView } from "react-native-web";
 const image = {
   uri: "https://res.cloudinary.com/tamir1234432/image/upload/v1657395208/PlayDog/PlayDog_eh0oen.jpg",
 };
@@ -118,7 +119,6 @@ const styles = StyleSheet.create({
   button: {
     fontSize: 20,
     color: "white",
-    // width: 120,
     marginTop: 8,
     borderRadius: 10,
     backgroundColor: "#c01c00",
