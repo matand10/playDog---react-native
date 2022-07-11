@@ -6,8 +6,9 @@ import {
   ImageBackground,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
-import { ScrollView } from "react-native-web";
+// import { ScrollView } from "react-native-web";
 const image = {
   uri: "https://res.cloudinary.com/tamir1234432/image/upload/v1657395208/PlayDog/PlayDog_eh0oen.jpg",
 };
@@ -38,48 +39,52 @@ const Homepage = ({ navigation }) => {
     handleValidPassword(password);
     console.log("email: ", email);
     console.log("Password: ", password);
+    navigation.push("Map");
   };
   return (
-    <View style={styles.container}>
-      <Text style={styles.logo}>PlayDog</Text>
-      <ImageBackground style={styles.img} source={image} />
-      <View style={styles.form}>
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(value) => setEmail(value)}
-          value={email}
-          placeholder="Email"
-        />
-        {emailValidError ? (
-          <Text style={styles.valid}>{emailValidError}</Text>
-        ) : null}
-        <Text style={styles.label}>Password</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(value) => setPassword(value)}
-          value={password}
-          placeholder="Password"
-          secureTextEntry={true}
-        />
-        {passwordValidError ? (
-          <Text style={styles.valid}>{passwordValidError}</Text>
-        ) : null}
-        <TouchableOpacity onPress={submit}>
-          <Text style={styles.button}>Login</Text>
-        </TouchableOpacity>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.logo}>PlayDog</Text>
+        <ImageBackground style={styles.img} source={image} />
+        <View style={styles.form}>
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(value) => setEmail(value)}
+            value={email}
+            placeholder="Email"
+          />
+          {emailValidError ? (
+            <Text style={styles.valid}>{emailValidError}</Text>
+          ) : null}
+          <Text style={styles.label}>Password</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(value) => setPassword(value)}
+            value={password}
+            placeholder="Password"
+            secureTextEntry={true}
+          />
+          {passwordValidError ? (
+            <Text style={styles.valid}>{passwordValidError}</Text>
+          ) : null}
+          <TouchableOpacity onPress={submit}>
+            <Text style={styles.button}>Login</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.push("Signup")}>
-          <Text style={styles.button}>Signup</Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.push("Signup")}>
+            <Text style={styles.button}>Signup</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: "100%",
     alignItems: "center",
     backgroundColor: "#282828",
   },

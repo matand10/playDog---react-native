@@ -5,6 +5,8 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  ScrollView,
 } from "react-native";
 
 import { userService } from "../services/userService.js";
@@ -15,64 +17,67 @@ const Signup = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const submit = () => {
+  const onSubmit = async () => {
     let user = {
       name,
       username,
       email,
       password,
     };
-    userService.signup();
+    user = await userService.signup(user);
+    navigation.push("Profile");
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Signup</Text>
-      <View style={styles.form}>
-        <Text style={styles.label}>Name</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(value) => setName(value)}
-          value={name}
-          placeholder="Name"
-        />
-        <Text style={styles.label}>Username</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(value) => setUsername(value)}
-          value={username}
-          placeholder="Username"
-        />
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(value) => setEmail(value)}
-          value={email}
-          placeholder="Email"
-        />
-        <Text style={styles.label}>Password</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(value) => setPassword(value)}
-          value={password}
-          placeholder="Password"
-          secureTextEntry={true}
-        />
-        <TouchableOpacity onPress={submit}>
-          <Text style={styles.button}>Signup</Text>
-        </TouchableOpacity>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.header}>Signup</Text>
+        <View style={styles.form}>
+          <Text style={styles.label}>Name</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(value) => setName(value)}
+            value={name}
+            placeholder="Name"
+          />
+          <Text style={styles.label}>Username</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(value) => setUsername(value)}
+            value={username}
+            placeholder="Username"
+          />
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(value) => setEmail(value)}
+            value={email}
+            placeholder="Email"
+          />
+          <Text style={styles.label}>Password</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(value) => setPassword(value)}
+            value={password}
+            placeholder="Password"
+            secureTextEntry={true}
+          />
+          <TouchableOpacity onPress={onSubmit}>
+            <Text style={styles.button}>Submit</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.push("Homepage")}>
-          <Text style={styles.button}>Login</Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.push("Homepage")}>
+            <Text style={styles.button}>Login</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: "center",
     backgroundColor: "#282828",
   },

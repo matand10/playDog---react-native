@@ -1,6 +1,5 @@
 "use strict";
 
-// import { utilService } from "@/services/util.service.js";
 import { utilService } from "./util.service.js";
 import { storageService } from "./storage.service.js";
 
@@ -38,6 +37,7 @@ async function remove(collectionName, id) {
 
 async function post(collectionName, item) {
   var collection = await query(collectionName);
+  collection = collection ? collection : [];
   item[ID_FIELD] = utilService.makeId();
   collection.push(item);
 
