@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,7 +8,9 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-// import { ScrollView } from "react-native-web";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { userService } from "../services/userService";
 const image = {
   uri: "https://res.cloudinary.com/tamir1234432/image/upload/v1657395208/PlayDog/PlayDog_eh0oen.jpg",
 };
@@ -19,13 +21,27 @@ const Homepage = ({ navigation }) => {
   const [emailValidError, setEmailValidError] = useState("");
   const [passwordValidError, setPasswordValidError] = useState("");
 
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
+    AsyncStorage.getItem("LOGIN").then((user) => {
+      if (user) navigation.push("MainApp", { user: user });
+    });
+  };
+
   const handleValidEmail = (val) => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
     if (val.length === 0) setEmailValidError("Email address must be enter");
     else if (reg.test(val) === false)
       setEmailValidError("Enter valid email address");
-    else setEmailValidError("");
+    else {
+      setEmailValidError("");
+      return true;
+    }
+    return false;
   };
 
   const handleValidPassword = (val) => {
@@ -34,12 +50,11 @@ const Homepage = ({ navigation }) => {
     else setPasswordValidError("");
   };
 
-  const submit = () => {
-    handleValidEmail(email);
-    handleValidPassword(password);
-    console.log("email: ", email);
-    console.log("Password: ", password);
-    navigation.push("Map");
+  const submit = async () => {
+    if (handleValidEmail(email) && handleValidPassword(password)) {
+      const user = await userService.login(email, password);
+      if (user) navigation.push("MainApp", { user });
+    }
   };
   return (
     <ScrollView>

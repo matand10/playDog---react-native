@@ -2,16 +2,10 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Profile = () => {
+const Dogs = (user) => {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = () => {
-    AsyncStorage.getItem("LOGIN").then((value) => setUser(value));
-  };
+  useEffect(() => {}, []);
 
   return (
     <ScrollView>
@@ -22,4 +16,4 @@ const Profile = () => {
 
 const styles = StyleSheet.create({});
 
-export default Profile;
+export default Dogs;
