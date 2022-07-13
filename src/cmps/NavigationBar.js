@@ -3,14 +3,15 @@ import * as React from "react";
 import { StyleSheet } from "react-native";
 import Profile from "./Profile";
 import { Map } from "./Map";
+import MyDogs from "./MyDogs";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
-const NavigationBar = (user) => {
+const NavigationBar = ({ user }) => {
   return (
     <Tab.Navigator>
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Map"
         component={Map}
         options={{
@@ -25,6 +26,15 @@ const NavigationBar = (user) => {
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <MaterialIcons name="face" size={size} color={color} />
+          ),
+        }}
+      /> */}
+      <Tab.Screen
+        name="My Dogs"
+        component={MyDogs}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <MaterialIcons name="pets" size={size} color={color} />
           ),
         }}
       />

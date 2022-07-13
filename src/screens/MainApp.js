@@ -5,7 +5,7 @@ import NavigationBar from "../cmps/NavigationBar";
 const MainApp = ({ route }) => {
   const [user, setUser] = useState(route.params.user);
 
-  return <NavigationBar user="user" />;
+  return <NavigationBar user={user} />;
 };
 
 const styles = StyleSheet.create({});
