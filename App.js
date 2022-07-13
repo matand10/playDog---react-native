@@ -6,21 +6,21 @@ import Homepage from "./src/screens/Homepage";
 import Signup from "./src/screens/Signup";
 import { Map } from "./src/screens/Map";
 import Profile from "./src/screens/Profile";
+import { Chats } from "./src/screens/Chats";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    // <SafeAreaView>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Homepage" component={Homepage} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Map" component={Map} />
+        <Stack.Screen name="Chats" component={Chats} />
         <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
-    // </SafeAreaView>
   );
 }
 
