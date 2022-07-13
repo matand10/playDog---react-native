@@ -50,6 +50,7 @@ const NavigationBar = ({ user }) => {
       <Tab.Screen
         name="Profile"
         component={Profile}
+        initialParams={{ currentUser: user }}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <MaterialIcons name="person" size={size} color={color} />

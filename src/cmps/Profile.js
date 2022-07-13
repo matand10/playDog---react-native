@@ -1,36 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
   Text,
+  Button
 } from "react-native";
 import { userService } from "../services/userService";
 
-const Profile = ({ navigation }) => {
-
+const Profile = ({ navigation, route }) => {
+  const [user, setUser] = useState(null)
   const onSignout = async () => {
     await userService.signout();
     navigation.push("Homepage");
   };
 
+  useEffect(() => {
+    const { currentUser } = route.params;
+    setUser(currentUser)
+  }, [])
+
+  if (!user) return <Text>Loading...</Text>
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={onSignout}>
-          <Text style={styles.button}>Signout</Text>
-        </TouchableOpacity>
+    <View style={styles.container}>
+      <View style={styles.profileHeader}>
+        <Text>{user.username}</Text>
+        <Button title="Signout" onPress={onSignout} style={styles.button} />
       </View>
-    </ScrollView>
+      <View style={styles.imgsContainer}>
+
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: "100%",
-    alignItems: "center",
     backgroundColor: "#282828",
   },
   button: {
@@ -42,6 +49,14 @@ const styles = StyleSheet.create({
     padding: 8,
     textAlign: "center",
   },
+  profileHeader: {
+    flex: 1,
+    // backgroundColor: 'blue'
+  },
+  imgsContainer: {
+    flex: 1,
+    // backgroundColor: 'red'
+  }
 });
 
 export default Profile;
