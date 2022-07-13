@@ -4,9 +4,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Homepage from "./src/screens/Homepage";
 import Signup from "./src/screens/Signup";
-import { Map } from "./src/screens/Map";
-import Profile from "./src/screens/Profile";
-import { Chats } from "./src/screens/Chats";
+import { Map } from "./src/cmps/Map";
+import Profile from "./src/cmps/Profile";
+import MainApp from "./src/screens/MainApp";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,9 +16,9 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Homepage" component={Homepage} />
         <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="Map" component={Map} />
-        <Stack.Screen name="Chats" component={Chats} />
-        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="MainApp" component={MainApp} />
+        {/* <Stack.Screen name="Map" component={Map} />
+        <Stack.Screen name="Profile" component={Profile} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

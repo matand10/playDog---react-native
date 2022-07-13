@@ -1,5 +1,6 @@
 import { dbService } from "./db.service.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { storageService } from "./storage.service.js";
 
 export const userService = {
   getUserById,
@@ -26,18 +27,19 @@ async function signup(user) {
   return user;
 }
 
-async function login(name, password) {
+async function login(email, password) {
   const users = await dbService.query(KEY);
   if (!users.length) {
+    return undefined;
   }
   let user = users.find(
-    (user) => user.name === name && user.password === password
+    (user) => user.email === email && user.password === password
   );
-  if (!user) return user;
-  else sessionStorage.setItem(KEY, user._id);
+  if (!user) return undefined;
+  else storageService.save("LOGIN", user);
   return user;
 }
 
-function signout() {
-  sessionStorage.removeItem(KEY);
+async function signout() {
+  await AsyncStorage.removeItem("LOGIN");
 }
