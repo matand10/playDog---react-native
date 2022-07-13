@@ -40,6 +40,6 @@ async function login(email, password) {
   return user;
 }
 
-function signout() {
-  AsyncStorage.removeItem(KEY);
+async function signout() {
+  await AsyncStorage.removeItem("LOGIN");
 }

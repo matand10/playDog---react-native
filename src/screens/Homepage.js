@@ -47,12 +47,17 @@ const Homepage = ({ navigation }) => {
   const handleValidPassword = (val) => {
     if (val.length === 0)
       setPasswordValidError("Password address must be enter");
-    else setPasswordValidError("");
+    else {
+      setPasswordValidError("");
+      return true;
+    }
+    return false;
   };
 
   const submit = async () => {
     if (handleValidEmail(email) && handleValidPassword(password)) {
       const user = await userService.login(email, password);
+      console.log(user);
       if (user) navigation.push("MainApp", { user });
     }
   };

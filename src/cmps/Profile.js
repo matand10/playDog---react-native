@@ -1,28 +1,41 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, ScrollView, Button } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import { userService } from "../services/userService";
 
-const Profile = (props) => {
-  useEffect(() => {
-    console.log(props);
-  }, []);
+const Profile = ({ navigation }) => {
+  // useEffect(() => {
+  //   console.log(props);
+  // }, []);
 
-  const onSignout = () => {
-    userService.signout();
+  const onSignout = async () => {
+    await userService.signout();
     navigation.push("Homepage");
   };
 
   return (
     <ScrollView>
-      {/* <View>{user.email}</View> */}
-      <Button style={styles.button} onPress={() => onSignout}>
-        Signout
-      </Button>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={onSignout}>
+          <Text style={styles.button}>Signout</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    height: "100%",
+    alignItems: "center",
+    backgroundColor: "#282828",
+  },
   button: {
     fontSize: 20,
     color: "white",

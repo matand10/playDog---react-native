@@ -24,7 +24,7 @@ const Signup = ({ navigation }) => {
       password,
     };
     user = await userService.signup(user);
-    navigation.push("MainApp");
+    navigation.push("MainApp", { user: user });
   };
 
   return (
