@@ -86,12 +86,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: "white",
   },
-  smallheader: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginTop: 20,
-    color: "white",
-  },
   form: {
     marginTop: 20,
     padding: 15,
