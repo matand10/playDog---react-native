@@ -1,122 +1,84 @@
-// import * as React from 'react';
-// import MapView, { Callout, Marker } from 'react-native-maps';
-// import { StyleSheet, Text, View, Dimensions, Button } from 'react-native';
-// import colors from '../config/colors';
-// import * as Location from 'expo-location';
+import React, { useState, useEffect } from "react";
+import MapView, { Callout, Marker } from "react-native-maps";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
+import * as Location from "expo-location";
 
-// export function Map({ navigation }) {
+export default function Map() {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
 
-//   React.useEffect(() => {
-//     (async () => {
-//       let { status } = await Location.requestForegroundPermissionsAsync();
-//       if (status !== 'granted') {
-//         setErrorMsg('Permission to access location was denied');
-//         return;
-//       }
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
 
-//       let location = await Location.getCurrentPositionAsync({});
-//       console.log('Location', location)
-//     })();
-//   }, []);
+  let text = "Waiting..";
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    // console.log(location);
+    text = JSON.stringify(location);
+  }
 
+  console.log("hey");
 
-//   console.log(navigation);
-
-//   return (
-//     <View style={styles.container}>
-//       <View style={styles.mapContainer}>
-//         <GoogleMap />
-//       </View>
-//       <View style={styles.trackBtn}>
-//         <Button title="Start Tracking" />
-//       </View>
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   navContainer: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     width: '100%',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     flexDirection: 'row',
-//   },
-//   map: {
-//     backgroundColor: 'red',
-//     height: '100%',
-//     width: '100%',
-//   },
-//   mapContainer: {
-//     flex: 5,
-//     width: Dimensions.get('window').width,
-//     height: Dimensions.get('window').height,
-//   },
-//   trackBtn: {
-//     margin: 20,
-//     backgroundColor: colors.primary,
-//   },
-// });
-
-// const GoogleMap = () => {
-//   return (
-//     <MapView
-//       style={styles.map}
-//       initialRegion={{
-//         latitude: 32.109333,
-//         longitude: 34.855499,
-//         latitudeDelta: 1,
-//         longitudeDelta: 1,
-//       }}
-//     >
-//       <Marker coordinate={{
-//         latitude: 32.109333,
-//         longitude: 34.855499,
-//       }}
-//         pinColor="blue"
-//       >
-//         <Callout>
-//           <Text>
-//             Hello
-//           </Text>
-//         </Callout>
-//       </Marker>
-//     </MapView>
-//   )
-// }
-
-
-
-
-import * as React from "react";
-// import MapView from "react-native-maps";
-import { StyleSheet, View, Dimensions } from "react-native";
-
-export const Map = (user) => {
-  return (
-    <View style={styles.container}>
-      {/* <MapView style={styles.map} /> */}
-    </View>
-  );
+  if (!location) return <Text>Loading...</Text>;
+  else
+    return (
+      <View style={styles.container}>
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+          }}
+        >
+          <Marker
+            coordinate={{
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+            }}
+            pinColor="blue"
+          >
+            <Callout>
+              <Text>Hello</Text>
+            </Callout>
+          </Marker>
+        </MapView>
+      </View>
+    );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
   map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-  }
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+  },
+  TextContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
+    backgroundColor: "red",
+  },
+  paragraph: {
+    fontSize: 18,
+    textAlign: "center",
+  },
 });
