@@ -6,11 +6,11 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import DogsList from "./DogsList";
 
-const MyDogs = () => {
-  // const [user, setUser] = useState(null);
-
-  useEffect(() => {}, []);
+const MyDogs = ({ route }) => {
+  const [dogs, setDogs] = useState(route.params.dogs);
+  const [dog, setDog] = useState(route.params.dogs[0]);
 
   const addDog = () => {
     console.log("add dog");
@@ -18,6 +18,8 @@ const MyDogs = () => {
 
   return (
     <View style={styles.container}>
+      <DogsList dogs={dogs} />
+      {/* <DogAdd /> */}
       <TouchableOpacity onPress={addDog}>
         <Text style={styles.button}>Add Dog</Text>
       </TouchableOpacity>
@@ -27,10 +29,12 @@ const MyDogs = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 3,
     height: "100%",
     alignItems: "center",
     backgroundColor: "#282828",
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   button: {
     fontSize: 20,

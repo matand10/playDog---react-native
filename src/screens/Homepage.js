@@ -27,7 +27,6 @@ const Homepage = ({ navigation }) => {
 
   const getData = () => {
     AsyncStorage.getItem("LOGIN").then((user) => {
-      console.log(user)
       if (user) navigation.push("MainApp", { user: JSON.parse(user) });
     });
   };

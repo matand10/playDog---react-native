@@ -32,6 +32,7 @@ const NavigationBar = ({ user }) => {
       <Tab.Screen
         name="My Dogs"
         component={MyDogs}
+        initialParams={{ dogs: user.dogs }}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <MaterialIcons name="pets" size={size} color={color} />
