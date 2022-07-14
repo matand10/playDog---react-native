@@ -11,24 +11,6 @@ const Tab = createBottomTabNavigator();
 const NavigationBar = ({ user }) => {
   return (
     <Tab.Navigator>
-      {/* <Tab.Screen
-        name="Map"
-        component={Map}
-        options={{
-          tabBarIcon: ({ focused, color, size }) => (
-            <MaterialIcons name="map" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarIcon: ({ focused, color, size }) => (
-            <MaterialIcons name="face" size={size} color={color} />
-          ),
-        }}
-      /> */}
       <Tab.Screen
         name="My Dogs"
         component={MyDogs}

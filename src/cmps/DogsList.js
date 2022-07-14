@@ -7,64 +7,30 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
+import { utilService } from "../services/util.service";
 import DogPreview from "./DogPreview";
 
-const DogsList = ({ dogs }) => {
-  const arr = [
-    {
-      name: "Joni!!!!!",
-      photo:
-        "https://res.cloudinary.com/tamir1234432/image/upload/v1657395208/PlayDog/PlayDog_eh0oen.jpg",
-    },
-    {
-      name: "Joni",
-      photo:
-        "https://res.cloudinary.com/tamir1234432/image/upload/v1657395208/PlayDog/PlayDog_eh0oen.jpg",
-    },
-    {
-      name: "Joni",
-      photo:
-        "https://res.cloudinary.com/tamir1234432/image/upload/v1657395208/PlayDog/PlayDog_eh0oen.jpg",
-    },
-    {
-      name: "Joni",
-      photo:
-        "https://res.cloudinary.com/tamir1234432/image/upload/v1657395208/PlayDog/PlayDog_eh0oen.jpg",
-    },
-    {
-      name: "Joni",
-      photo:
-        "https://res.cloudinary.com/tamir1234432/image/upload/v1657395208/PlayDog/PlayDog_eh0oen.jpg",
-    },
-    {
-      name: "Joni",
-      photo:
-        "https://res.cloudinary.com/tamir1234432/image/upload/v1657395208/PlayDog/PlayDog_eh0oen.jpg",
-    },
-    {
-      name: "Joni",
-      photo:
-        "https://res.cloudinary.com/tamir1234432/image/upload/v1657395208/PlayDog/PlayDog_eh0oen.jpg",
-    },
-    {
-      name: "Joni",
-      photo:
-        "https://res.cloudinary.com/tamir1234432/image/upload/v1657395208/PlayDog/PlayDog_eh0oen.jpg",
-    },
-    {
-      name: "Joni",
-      photo:
-        "https://res.cloudinary.com/tamir1234432/image/upload/v1657395208/PlayDog/PlayDog_eh0oen.jpg",
-    },
-    {
-      name: "Joni",
-      photo:
-        "https://res.cloudinary.com/tamir1234432/image/upload/v1657395208/PlayDog/PlayDog_eh0oen.jpg",
-    },
-  ];
+const DogsList = ({ dogs, setSelectedDog }) => {
+
+  const demoData = () => {
+    let arr = []
+    for (let i = 0; i < 11; i++) {
+      arr.push({
+        id: utilService.makeId(),
+        name: "Joni",
+        photo:
+          "https://res.cloudinary.com/tamir1234432/image/upload/v1657395208/PlayDog/PlayDog_eh0oen.jpg",
+      })
+    }
+    return arr
+  }
+  const arr = demoData()
+
+
+
   return (
     <View style={styles.container}>
-      <ScrollView horizontal>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style={styles.cardContainer}>
           <Image
             style={styles.img}
@@ -75,7 +41,7 @@ const DogsList = ({ dogs }) => {
           <Text style={styles.name}>Add Dog</Text>
         </View>
         {arr.map((dog, idx) => (
-          <DogPreview dog={dog} key={idx} />
+          <DogPreview dog={dog} key={idx} setSelectedDog={setSelectedDog} />
         ))}
       </ScrollView>
     </View>
@@ -84,7 +50,9 @@ const DogsList = ({ dogs }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // backgroundColor: 'red',
+    width: '100%',
+    height: 150,
   },
   cardContainer: {
     alignItems: "center",

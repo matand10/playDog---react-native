@@ -6,20 +6,23 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import { DogDetails } from "./DogDetails";
 import DogsList from "./DogsList";
 
 const MyDogs = ({ route }) => {
   const [dogs, setDogs] = useState(route.params.dogs);
   const [dog, setDog] = useState(route.params.dogs[0]);
+  const [selectedDog, setSelectedDog] = useState(null)
 
   const addDog = () => {
     console.log("add dog");
   };
 
+
   return (
     <View style={styles.container}>
-      <DogsList dogs={dogs} />
-      {/* <DogAdd /> */}
+      <DogsList dogs={dogs} setSelectedDog={setSelectedDog} />
+      {selectedDog && <DogDetails selectedDog={selectedDog} />}
       <TouchableOpacity onPress={addDog}>
         <Text style={styles.button}>Add Dog</Text>
       </TouchableOpacity>

@@ -8,11 +8,18 @@ import {
   Image,
 } from "react-native";
 
-const DogPreview = ({ dog }) => {
+const DogPreview = ({ dog, setSelectedDog }) => {
+
+  const onSelectDog = () => {
+    setSelectedDog(dog)
+  }
+
   return (
-    <View style={styles.container}>
-      <Image style={styles.img} source={{ uri: dog.photo }} />
-      <Text style={styles.name}>{dog.name}</Text>
+    <View style={styles.container} >
+      <TouchableOpacity style={{ alignItems: 'center' }} onPress={onSelectDog}>
+        <Image style={styles.img} source={{ uri: dog.photo }} />
+        <Text style={styles.name}>{dog.name}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
