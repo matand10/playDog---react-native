@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 20,
-    marginLeft: 10
+    marginLeft: 20,
+    marginRight: 20,
   },
   headerImg: {
     height: 60,
@@ -123,10 +124,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     color: 'black',
-    paddingHorizontal: 10,
     marginTop: 10,
     fontWeight: 'bold',
     marginBottom: 20,
+    marginLeft: 20,
   },
   editBtn: {
     alignItems: 'center',
